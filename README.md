@@ -74,6 +74,7 @@ To run this application, you'll need the following API keys:
    - In your deployed app, click "⚙️ Settings"
    - Go to "Secrets" tab
    - Add your API keys:
+
    ```toml
    GOOGLE_API_KEY = "AIzaSyBu8RmxMPG1kridRDNdLKJMXTnZf5xRBvg"
    EXCHANGE_RATE_API_KEY = "89fc1913420cd473fa63bdc2"
