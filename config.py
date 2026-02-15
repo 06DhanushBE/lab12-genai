@@ -1,16 +1,18 @@
 import os
+import sys
+import streamlit as st
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
 class Config:
-    # LLM Configuration
-    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+    # LLM Configuration - Check both secrets and env vars
+    GOOGLE_API_KEY = st.secrets.get('GOOGLE_API_KEY') if 'streamlit' in sys.modules else os.getenv('GOOGLE_API_KEY')
     
     # External API Keys
-    EXCHANGE_RATE_API_KEY = os.getenv('EXCHANGE_RATE_API_KEY')
-    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+    EXCHANGE_RATE_API_KEY = st.secrets.get('EXCHANGE_RATE_API_KEY') if 'streamlit' in sys.modules else os.getenv('EXCHANGE_RATE_API_KEY')
+    GOOGLE_MAPS_API_KEY = st.secrets.get('GOOGLE_MAPS_API_KEY') if 'streamlit' in sys.modules else os.getenv('GOOGLE_MAPS_API_KEY')
     
     # Application Settings
     DEBUG_MODE = os.getenv('DEBUG_MODE', 'false').lower() == 'true'

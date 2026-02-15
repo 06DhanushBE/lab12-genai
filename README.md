@@ -60,24 +60,82 @@ To run this application, you'll need the following API keys:
 
 ## Deployment
 
-### Local Development
+### 🚀 Streamlit Cloud Deployment (Recommended - FREE)
 
-```bash
-streamlit run app.py
-```
+1. **Deploy to Streamlit Cloud**
+   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Click "New app"
+   - Connect your GitHub account
+   - Select repository: `06DhanushBE/lab12-genai`
+   - Set main file path: `app.py`
+   - Click "Deploy"
 
-### Docker Deployment
+2. **Configure Secrets in Streamlit Cloud**
+   - In your deployed app, click "⚙️ Settings"
+   - Go to "Secrets" tab
+   - Add your API keys:
+   ```toml
+   GOOGLE_API_KEY = "AIzaSyBu8RmxMPG1kridRDNdLKJMXTnZf5xRBvg"
+   EXCHANGE_RATE_API_KEY = "89fc1913420cd473fa63bdc2"
+   ```
+
+   - Click "Save"
+   - Your app will automatically redeploy with the secrets!
+
+### 💻 Local Development with Virtual Environment
+
+1. **Create Virtual Environment**
+
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+
+   # Activate virtual environment
+   # Windows:
+   venv\Scripts\activate
+
+   # macOS/Linux:
+   source venv/bin/activate
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set up Environment Variables**
+
+   ```bash
+   cp .env.template .env
+   # Edit .env file with your API keys
+   ```
+
+4. **Run the Application**
+   ```bash
+   streamlit run app.py
+   ```
+
+### 🐳 Docker Deployment
 
 ```bash
 docker build -t country-financial-agent .
 docker run -p 8501:8501 --env-file .env country-financial-agent
 ```
 
-### Cloud Deployment
+### ☁️ Other Cloud Platforms
 
-- **Streamlit Cloud**: Push to GitHub and connect via [share.streamlit.io](https://share.streamlit.io)
-- **Heroku**: Use the included `Procfile`
-- **AWS/GCP/Azure**: Use Docker container deployment
+**Heroku:**
+
+- Add `Procfile`: `web: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0`
+- Set environment variables in Heroku dashboard
+
+**Railway/Render:**
+
+- Connect GitHub repository
+- Set build command: `pip install -r requirements.txt`
+- Set start command: `streamlit run app.py --server.port=$PORT --server.address=0.0.0.0`
+- Add environment variables in platform settings
 
 ## Features
 
